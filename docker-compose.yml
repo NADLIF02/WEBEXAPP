@@ -1,0 +1,22 @@
+# docker-compose.yml
+
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./public:/usr/src/app/public
+      - ./app.js:/usr/src/app/app.js
+    environment:
+      - NODE_ENV=development
+    restart: always
+  db:
+    image: nouchka/sqlite3
+    volumes:
+      - db-data:/root/db
+    restart: always
+
+volumes:
+  db-data:
